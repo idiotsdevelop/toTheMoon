@@ -4,17 +4,17 @@
 
 ## Early Executives
 
-CEO , CTO : Myungsworld
-Ediot Programmer : Byun
+CEO , CTO : Myungsworld. 
+Ediot Programmer : Byun. 
 
 ### Tech Stack.
 
-Stacks :
+Stacks :  
 
-BackEnd Language : 
-Front Language :
+BackEnd Language :   
+Front Language :  
 
-Deploy :
+Deploy :  
 
 ### ProtoType
 
