@@ -4,7 +4,7 @@
 
 ## Early Executives
 
-CEO , CTO : Myungsworld. 
+CEO , CTO : Myungsworld.   
 Ediot Programmer : Byun. 
 
 ### Tech Stack.
