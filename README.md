@@ -5,7 +5,7 @@
 ## Early Executives
 
 CEO , CTO : Myungsworld.   
-Ediot Programmer : Byun. 
+~~Ediot~~Idiot Programmer : Byun. 
 
 ### Tech Stack.
 
