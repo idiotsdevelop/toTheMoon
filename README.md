@@ -1,4 +1,4 @@
-# ToTheMoon Prj.
+# Moon Prj.
  - Outline : Auto Trading Service.
  - ~~WithAPI Bithumb or Upbit~~
 ---
@@ -28,16 +28,14 @@ Check APIs : http://localhost:5000/swagger/index.html.
 
 CEO , CTO : Myungsworld.   
 ~~Ediot~~Idiot Programmer : Byun. 
+Real Byungsin : Jooooong.
 
 ### Tech Stack.
 
-Stacks :  
+Stacks : JIRA , Git , Gin , Flask , React 
 
-BackEnd Language :   
-Front Language :  
+BackEnd Language : GoLang , Python  
+Front Language :  Javascript 
 
-Deploy :  
-
-### ProtoType
 
 
