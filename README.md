@@ -4,10 +4,10 @@
 ---
 **Only For MacOs User, Linux might be Ok  ~~Fuck off Windows~~**  
 
-## Getting Started with Go
+## Getting Started with Go-Gin FrameWork
 
 I recommend IDE for GoLand from jetbrains , not necessary  
-[Install Go](https://golang.org/doc/install)  
+No doubt you need to install go [Go-Installing](https://golang.org/doc/install)
 
 **Build and Run on Terminal**  
 
