@@ -12,7 +12,7 @@ I recommend IDE for GoLand from jetbrains , not necessary
 Build and Run on Terminal  
 cd ~/go/src  
 git clone https://github.com/idiotsdevelop/toTheMoon.git    
-cd backend   
+cd toTheMoon/backend   
 go build   
 ./backend   
 
