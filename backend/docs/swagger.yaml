@@ -1,0 +1,20 @@
+info:
+  contact: {}
+  license: {}
+paths:
+  /api/web/test:
+    get:
+      consumes:
+      - application/json
+      description: 테스트
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 테스트
+      tags:
+      - trade
+swagger: "2.0"
