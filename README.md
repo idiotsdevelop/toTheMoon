@@ -8,7 +8,13 @@
 
 I recommend IDE for GoLand from jetbrains , not necessary  
 [Install Go](https://golang.org/doc/install)  
-[Install Gin](https://github.com/gin-gonic/gin)
+
+Build and Run on Terminal  
+cd ~/go/src  
+git clone https://github.com/idiotsdevelop/toTheMoon.git    
+cd backend   
+go build   
+./backend   
 
 ## Early Executives
 
