@@ -9,13 +9,15 @@
 I recommend IDE for GoLand from jetbrains , not necessary  
 [Install Go](https://golang.org/doc/install)  
 
-Build and Run on Terminal  
+**Build and Run on Terminal**  
+
+```shell
 cd ~/go/src  
 git clone https://github.com/idiotsdevelop/toTheMoon.git    
 cd toTheMoon/backend   
 go build   
 ./backend   
-
+```
 ## Early Executives
 
 CEO , CTO : Myungsworld.   
