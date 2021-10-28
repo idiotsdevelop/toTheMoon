@@ -20,6 +20,10 @@ cd toTheMoon/backend
 go build   
 ./backend   
 ```
+  
+On the Browser. 
+Check APIs : http://localhost:5000/swagger/index.html. 
+
 ## Early Executives
 
 CEO , CTO : Myungsworld.   
