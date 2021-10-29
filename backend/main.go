@@ -14,7 +14,6 @@ import (
 	"time"
 	"toTheMoon/backend/config"
 	docs "toTheMoon/backend/docs"
-
 )
 
 var (
@@ -91,7 +90,7 @@ func servingFE(r *gin.Engine) {
 		//var staticFilePath string
 
 		//if config.IsLocal() {
-		//	c.File("../frontend/src/app/app.component.index.html")
+			c.File("../index.html")
 		//}
 
 	})

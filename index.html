@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Go WebSocket Tutorial</title>
+</head>
+<body>
+<h2>Hello World</h2>
+<h1 id = "bit"></h1>
+
+
+<!-- wss://pubwss.bithumb.com/pub/ws -->
+<!-- ws://127.0.0.1:5000/api/web/socket -->
+<script>
+    let socket = new WebSocket("wss://pubwss.bithumb.com/pub/ws");
+    console.log("Attempting Connection...");
+
+    socket.onopen = function(e) {
+        console.log("onopen ", arguments);
+        socket.send('{"type":"ticker","symbols":["BTC_KRW","ETH_KRW"],"tickTypes":["1H"]}')
+
+        // console.log("onopen ", arguments);
+    };
+
+    socket.onclose = function(e) {
+        console.log("onclose ", arguments);
+        socket.send("Client Closed!")
+    };
+
+    socket.onmessage = function(e) {
+        console.log("onmessage", arguments);
+        document.getElementById("bit").innerHTML=e.data
+
+    };
+
+    socket.onerror = error => {
+        console.log("Socket Error: ", error);
+    };
+
+</script>
+</body>
+</html>

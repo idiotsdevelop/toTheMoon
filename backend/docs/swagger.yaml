@@ -2,6 +2,21 @@ info:
   contact: {}
   license: {}
 paths:
+  /api/web/socket:
+    get:
+      consumes:
+      - application/json
+      description: 소켓
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 소켓
+      tags:
+      - trade
   /api/web/test:
     get:
       consumes:
