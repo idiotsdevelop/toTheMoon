@@ -1,7 +1,37 @@
+definitions:
+  bithumb.ReqCandleStick:
+    properties:
+      chart_interval:
+        type: string
+      ticker:
+        type: string
+    type: object
 info:
   contact: {}
   license: {}
 paths:
+  /api/web/bithumb/candle_stick:
+    post:
+      consumes:
+      - application/json
+      description: 빗썸 캔들스틱 API
+      parameters:
+      - description: 티커, 차트간격 기준
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/bithumb.ReqCandleStick'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 빗썸 캔들스틱 API
+      tags:
+      - bithumb
   /api/web/socket:
     get:
       consumes:

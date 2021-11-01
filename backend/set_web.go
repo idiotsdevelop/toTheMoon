@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"toTheMoon/backend/handlers-web/bithumb"
 	"toTheMoon/backend/handlers-web/socket"
 	"toTheMoon/backend/handlers-web/test"
 )
@@ -17,4 +18,10 @@ func setWeb(rWeb *gin.RouterGroup) {
 	{
 		rSocket.GET("", socket.Call)
 	}
+
+	rBithumb := rWeb.Group("/bithumb")
+	{
+		rBithumb.POST("/candle_stick", bithumb.CandleStick)
+	}
+
 }

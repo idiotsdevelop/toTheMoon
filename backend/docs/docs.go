@@ -25,6 +25,40 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/web/bithumb/candle_stick": {
+            "post": {
+                "description": "빗썸 캔들스틱 API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bithumb"
+                ],
+                "summary": "빗썸 캔들스틱 API",
+                "parameters": [
+                    {
+                        "description": "티커, 차트간격 기준",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/bithumb.ReqCandleStick"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/web/socket": {
             "get": {
                 "description": "소켓",
@@ -68,6 +102,19 @@ var doc = `{
                             "type": "string"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "bithumb.ReqCandleStick": {
+            "type": "object",
+            "properties": {
+                "chart_interval": {
+                    "type": "string"
+                },
+                "ticker": {
+                    "type": "string"
                 }
             }
         }
