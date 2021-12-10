@@ -1,53 +1,71 @@
 package config
 
-import "fmt"
-
-type ENV string
-
-const (
-	Dev ENV = "dev"
-	Prod ENV = "prod"
-	Local ENV = "local"
+import (
+	"os"
+	"toTheMoon/backend/constants"
 )
 
 var env ENV
 var isLocal bool
-var mysqlPassword string
-
-
-
 
 func Init(setEnv ENV) {
 	initialize(setEnv)
-	setMysqlPassword(env)
+	setMysqlPassword()
 }
 
 func initialize(setEnv ENV) {
 
-	switch setEnv {
-	case Dev :
+	var err error
+	// value stored in eb environment
+	_env := os.Getenv(constants.ENV)
+
+	switch _env {
+	case string(Dev):
 		env = Dev
-	case Prod :
+	case string(Prod):
 		env = Prod
 	default:
-		env = setEnv
+
 		isLocal = true
+		env = setEnv
 	}
 
-}
+	// read config by using viper
 
-func setMysqlPassword(env ENV) {
-
-	// AWS 시크릿매니저, 로컬 , 어디선가 가져와서 변수에 대입
-	fetchFromAWSSecretManger := fmt.Sprintf("myungsworld/:%s/mysql",env)
-
-	mysqlPassword = fetchFromAWSSecretManger
-}
-
-func MySqlPassword() string {
-	return mysqlPassword
+	v, err = readConfig(string(env))
+	if err != nil {
+		panic(err)
+	}
 }
 
 func IsLocal() bool {
 	return isLocal
+}
+
+var mysqlPassword string
+
+func setMysqlPassword() {
+	if IsLocal() {
+		mysqlPassword = ""
+	} else {
+
+		// use it when deployed
+
+		//secretName := fmt.Sprintf(mysqlSecretNameFmt, env)
+		//
+		//secretStr, _ := secretsmanager.GetSecret(secretName)
+		//
+		//var secret struct {
+		//	Password string `json:"password"`
+		//}
+		//if err := json.Unmarshal([]byte(secretStr), &secret); err != nil {
+		//	panic(cerror.UnMarshallError(err))
+		//}
+		//
+		//mysqlPassword = secret.Password
+	}
+}
+
+func MySqlPassword() string {
+	return mysqlPassword
 }

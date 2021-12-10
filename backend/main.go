@@ -27,7 +27,7 @@ func main() {
 	osSignal = make(chan os.Signal, 10000)
 	signal.Notify(osSignal, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
-	// 설정값 초기화
+	// Init config ( default config/local.yaml. if deploy , depends on ./backend/config )
 	config.Init(config.Local)
 
 	logFlags := log.Lshortfile
@@ -90,7 +90,7 @@ func servingFE(r *gin.Engine) {
 		//var staticFilePath string
 
 		//if config.IsLocal() {
-			c.File("../index.html")
+		c.File("../index.html")
 		//}
 
 	})
