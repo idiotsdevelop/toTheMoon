@@ -4,7 +4,6 @@ type ENV string
 
 const (
 	Local ENV = "local"
-
 	Dev  ENV = "dev"
 	Prod ENV = "prod"
 )

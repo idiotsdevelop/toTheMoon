@@ -12,4 +12,7 @@ require (
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
 	github.com/swaggo/gin-swagger v1.3.2
 	github.com/swaggo/swag v1.7.4
+	gorm.io/driver/mysql v1.2.1 // indirect
+	gorm.io/gorm v1.22.4 // indirect
+	gorm.io/plugin/dbresolver v1.1.0 // indirect
 )
