@@ -1,0 +1,28 @@
+<div class="roughly-logo-side" style="font-size:80px; text-align: center;">
+    <img src="/assets/tothemoon.png" height="100" alt="footer logo"/>
+</div>
+<div class="roughly-login-side">
+    <div style="font-size: 80px; text-align: center;"></div>
+    <form nz-form [formGroup]="validateForm" class="roughly-login-form" (ngSubmit)="submitForm()">
+        <div style="font-size: 48px">아이유</div>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your id!">
+                <nz-input-group>
+                    <input type="text" nz-input formControlName="userId" placeholder="아이디 입력"/>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <div style="font-size:48px;">비밀번호</div>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group>
+              <input type="password" nz-input formControlName="password" placeholder="비밀번호를 입력하세요" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
+          [disabled]="validateForm.invalid">
+          <span style="font-size: 40px;">로그인</span>
+        </button>
+      </form>
+    </div>
