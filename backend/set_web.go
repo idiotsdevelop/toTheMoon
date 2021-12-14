@@ -19,6 +19,11 @@ func setWeb(rWeb *gin.RouterGroup) {
 		rSocket.GET("", socket.Call)
 	}
 
+	//rUpbit := rWeb.Group("/upbit")
+	{
+
+	}
+
 	rBithumb := rWeb.Group("/bithumb")
 	{
 		rBithumb.POST("/candle_stick", bithumb.CandleStick)

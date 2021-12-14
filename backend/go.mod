@@ -7,6 +7,7 @@ require (
 	github.com/getsentry/sentry-go v0.11.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.4
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/spf13/viper v1.3.2
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
