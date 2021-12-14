@@ -4,7 +4,7 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
-	"toTheMoon/backend/handlers-web/upbit/model"
+	"toTheMoon/backend/model"
 
 	"hash"
 	"net/http"

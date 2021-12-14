@@ -1,8 +1,8 @@
 package upbit
 
 import (
-	"toTheMoon/backend/handlers-web/upbit/model"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange/account"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/exchange/account"
 )
 
 // GetAccounts 전체 계좌 조회

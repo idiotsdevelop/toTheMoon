@@ -1,9 +1,8 @@
 package upbit
 
 import (
-
 	"testing"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange"
+	"toTheMoon/backend/model/exchange"
 )
 
 func TestDeposit(t *testing.T) {

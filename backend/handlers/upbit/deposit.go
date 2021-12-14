@@ -3,9 +3,9 @@ package upbit
 import (
 	"bytes"
 	"fmt"
-	"toTheMoon/backend/handlers-web/upbit/model"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange/deposit"
+	model2 "toTheMoon/backend/model"
+	"toTheMoon/backend/model/exchange"
+	deposit2 "toTheMoon/backend/model/exchange/deposit"
 
 	"io/ioutil"
 	"net/url"
@@ -33,7 +33,7 @@ import (
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetDeposits(currency, state string, uuids, txids []string, limit, page, orderBy string) ([]*deposit.Deposit, *model.Remaining, error) {
+func (u *Upbit) GetDeposits(currency, state string, uuids, txids []string, limit, page, orderBy string) ([]*deposit2.Deposit, *model2.Remaining, error) {
 	switch state {
 	case exchange.DEPOSIT_STATE_SUBMITTING:
 	case exchange.DEPOSIT_STATE_SUBMITTED:
@@ -86,12 +86,12 @@ func (u *Upbit) GetDeposits(currency, state string, uuids, txids []string, limit
 	}
 	defer resp.Body.Close()
 
-	deposits, e := deposit.DepositsFromJSON(resp.Body)
+	deposits, e := deposit2.DepositsFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
 
-	return deposits, model.RemainingFromHeader(resp.Header), nil
+	return deposits, model2.RemainingFromHeader(resp.Header), nil
 }
 
 // GetDeposit 개별 입금 조회
@@ -107,7 +107,7 @@ func (u *Upbit) GetDeposits(currency, state string, uuids, txids []string, limit
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetDeposit(uuid, txid, currency string) (*deposit.Deposit, *model.Remaining, error) {
+func (u *Upbit) GetDeposit(uuid, txid, currency string) (*deposit2.Deposit, *model2.Remaining, error) {
 	if (len(uuid) + len(txid) + len(currency)) == 0 {
 		return nil, nil, fmt.Errorf("invalid args")
 	}
@@ -134,12 +134,12 @@ func (u *Upbit) GetDeposit(uuid, txid, currency string) (*deposit.Deposit, *mode
 	}
 	defer resp.Body.Close()
 
-	deposit, e := deposit.DepositFromJSON(resp.Body)
+	deposit, e := deposit2.DepositFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
 
-	return deposit, model.RemainingFromHeader(resp.Header), nil
+	return deposit, model2.RemainingFromHeader(resp.Header), nil
 }
 
 // GenerateDepositCoinAddress 입금 주소 생성 요청
@@ -155,7 +155,7 @@ func (u *Upbit) GetDeposit(uuid, txid, currency string) (*deposit.Deposit, *mode
 // 주소 발급 요청 시 결과로 Response1이 반환되며 주소 발급 완료 이전까지 계속 Response1이 반환됩니다.
 //
 // 주소가 발급된 이후부터는 새로운 주소가 발급되는 것이 아닌 이전에 발급된 주소가 Response2 형태로 반환됩니다.
-func (u *Upbit) GenerateDepositCoinAddress(currency string) (*deposit.CoinAddress, *model.Remaining, error) {
+func (u *Upbit) GenerateDepositCoinAddress(currency string) (*deposit2.CoinAddress, *model2.Remaining, error) {
 	api, e := GetApiInfo(FuncGenerateDepositCoinAddress)
 	if e != nil {
 		return nil, nil, e
@@ -181,19 +181,19 @@ func (u *Upbit) GenerateDepositCoinAddress(currency string) (*deposit.CoinAddres
 		return nil, nil, e
 	}
 
-	resp1, e := model.Response1FromJSON(bytes.NewReader(bodyBytes))
+	resp1, e := model2.Response1FromJSON(bytes.NewReader(bodyBytes))
 	if e != nil {
 		return nil, nil, e
 	}
 
 	if resp1.Success {
-		return nil, model.RemainingFromHeader(resp.Header), fmt.Errorf(resp1.Message)
+		return nil, model2.RemainingFromHeader(resp.Header), fmt.Errorf(resp1.Message)
 	} else {
-		coinAddress, e := deposit.CoinAddressFromJSON(bytes.NewReader(bodyBytes))
+		coinAddress, e := deposit2.CoinAddressFromJSON(bytes.NewReader(bodyBytes))
 		if e != nil {
 			return nil, nil, e
 		}
-		return coinAddress, model.RemainingFromHeader(resp.Header), nil
+		return coinAddress, model2.RemainingFromHeader(resp.Header), nil
 	}
 }
 
@@ -202,7 +202,7 @@ func (u *Upbit) GenerateDepositCoinAddress(currency string) (*deposit.CoinAddres
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetDepositCoinAddresses() ([]*deposit.CoinAddress, *model.Remaining, error) {
+func (u *Upbit) GetDepositCoinAddresses() ([]*deposit2.CoinAddress, *model2.Remaining, error) {
 	api, e := GetApiInfo(FuncGetDepositCoinAddresses)
 	if e != nil {
 		return nil, nil, e
@@ -219,12 +219,12 @@ func (u *Upbit) GetDepositCoinAddresses() ([]*deposit.CoinAddress, *model.Remain
 	}
 	defer resp.Body.Close()
 
-	coinAddresses, e := deposit.CoinAddressesFromJSON(resp.Body)
+	coinAddresses, e := deposit2.CoinAddressesFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
 
-	return coinAddresses, model.RemainingFromHeader(resp.Header), nil
+	return coinAddresses, model2.RemainingFromHeader(resp.Header), nil
 }
 
 // GetDepositCoinAddress 개별 입금 주소 조회
@@ -236,7 +236,7 @@ func (u *Upbit) GetDepositCoinAddresses() ([]*deposit.CoinAddress, *model.Remain
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetDepositCoinAddress(currency string) (*deposit.CoinAddress, *model.Remaining, error) {
+func (u *Upbit) GetDepositCoinAddress(currency string) (*deposit2.CoinAddress, *model2.Remaining, error) {
 	api, e := GetApiInfo(FuncGetDepositCoinAddress)
 	if e != nil {
 		return nil, nil, e
@@ -257,12 +257,12 @@ func (u *Upbit) GetDepositCoinAddress(currency string) (*deposit.CoinAddress, *m
 	}
 	defer resp.Body.Close()
 
-	coinAddress, e := deposit.CoinAddressFromJSON(resp.Body)
+	coinAddress, e := deposit2.CoinAddressFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
 
-	return coinAddress, model.RemainingFromHeader(resp.Header), nil
+	return coinAddress, model2.RemainingFromHeader(resp.Header), nil
 }
 
 // DepositKrw 원화 입금하기
@@ -274,7 +274,7 @@ func (u *Upbit) GetDepositCoinAddress(currency string) (*deposit.CoinAddress, *m
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) DepositKrw(amount string) (*deposit.Deposit, *model.Remaining, error) {
+func (u *Upbit) DepositKrw(amount string) (*deposit2.Deposit, *model2.Remaining, error) {
 	api, e := GetApiInfo(FuncDepositKrw)
 	if e != nil {
 		return nil, nil, e
@@ -295,10 +295,10 @@ func (u *Upbit) DepositKrw(amount string) (*deposit.Deposit, *model.Remaining, e
 	}
 	defer resp.Body.Close()
 
-	deposit, e := deposit.DepositFromJSON(resp.Body)
+	deposit, e := deposit2.DepositFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
 
-	return deposit, model.RemainingFromHeader(resp.Header), nil
+	return deposit, model2.RemainingFromHeader(resp.Header), nil
 }

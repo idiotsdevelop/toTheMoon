@@ -2,8 +2,8 @@ package upbit
 
 import (
 	"fmt"
-	"toTheMoon/backend/handlers-web/upbit/model"
-	"toTheMoon/backend/handlers-web/upbit/model/quotation"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/quotation"
 
 	"net/url"
 )

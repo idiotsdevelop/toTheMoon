@@ -3,7 +3,7 @@ package withdraw
 import (
 	"encoding/json"
 	"io"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange/account"
+	"toTheMoon/backend/model/exchange/account"
 )
 
 // Chance : 출금 가능 정보

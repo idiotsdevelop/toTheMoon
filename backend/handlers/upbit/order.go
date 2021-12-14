@@ -2,9 +2,10 @@ package upbit
 
 import (
 	"fmt"
-	"github.com/sangx2/upbit/model"
-	"github.com/sangx2/upbit/model/exchange"
-	"github.com/sangx2/upbit/model/exchange/order"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/exchange"
+	"toTheMoon/backend/model/exchange/order"
+
 	"net/url"
 )
 

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
-	"toTheMoon/backend/handlers-web/upbit/model"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange/withdraw"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/exchange"
+	withdraw2 "toTheMoon/backend/model/exchange/withdraw"
 )
 
 // GetWithdraws 출금 리스트 조회
@@ -30,7 +30,7 @@ import (
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetWithdraws(currency, state string, uuids, txids []string, limit, page, orderBy string) ([]*withdraw.Withdraw, *model.Remaining, error) {
+func (u *Upbit) GetWithdraws(currency, state string, uuids, txids []string, limit, page, orderBy string) ([]*withdraw2.Withdraw, *model.Remaining, error) {
 	switch state {
 	case exchange.WITHDRAW_STATE_SUBMITTING:
 	case exchange.WITHDRAW_STATE_SUBMITTED:
@@ -85,7 +85,7 @@ func (u *Upbit) GetWithdraws(currency, state string, uuids, txids []string, limi
 	}
 	defer resp.Body.Close()
 
-	withdraws, e := withdraw.WithdrawsFromJSON(resp.Body)
+	withdraws, e := withdraw2.WithdrawsFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
@@ -106,7 +106,7 @@ func (u *Upbit) GetWithdraws(currency, state string, uuids, txids []string, limi
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetWithdraw(uuid, txid, currency string) (*withdraw.Withdraw, *model.Remaining, error) {
+func (u *Upbit) GetWithdraw(uuid, txid, currency string) (*withdraw2.Withdraw, *model.Remaining, error) {
 	if (len(uuid) + len(txid) + len(currency)) == 0 {
 		return nil, nil, fmt.Errorf("invalid args")
 	}
@@ -133,7 +133,7 @@ func (u *Upbit) GetWithdraw(uuid, txid, currency string) (*withdraw.Withdraw, *m
 	}
 	defer resp.Body.Close()
 
-	withdraw, e := withdraw.WithdrawFromJSON(resp.Body)
+	withdraw, e := withdraw2.WithdrawFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
@@ -150,7 +150,7 @@ func (u *Upbit) GetWithdraw(uuid, txid, currency string) (*withdraw.Withdraw, *m
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token (JWT)
-func (u *Upbit) GetWithdrawChance(currency string) (*withdraw.Chance, *model.Remaining, error) {
+func (u *Upbit) GetWithdrawChance(currency string) (*withdraw2.Chance, *model.Remaining, error) {
 	if len(currency) == 0 {
 		return nil, nil, fmt.Errorf("currency length is 0")
 	}
@@ -175,7 +175,7 @@ func (u *Upbit) GetWithdrawChance(currency string) (*withdraw.Chance, *model.Rem
 	}
 	defer resp.Body.Close()
 
-	chance, e := withdraw.ChanceFromJSON(resp.Body)
+	chance, e := withdraw2.ChanceFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
@@ -200,7 +200,7 @@ func (u *Upbit) GetWithdrawChance(currency string) (*withdraw.Chance, *model.Rem
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) WithdrawCoin(currency, amount, address, secondaryAddress, transactionType string) (*withdraw.Withdraw, *model.Remaining, error) {
+func (u *Upbit) WithdrawCoin(currency, amount, address, secondaryAddress, transactionType string) (*withdraw2.Withdraw, *model.Remaining, error) {
 	if len(currency) == 0 {
 		return nil, nil, fmt.Errorf("currency length is 0")
 	}
@@ -244,7 +244,7 @@ func (u *Upbit) WithdrawCoin(currency, amount, address, secondaryAddress, transa
 	}
 	defer resp.Body.Close()
 
-	withdraw, e := withdraw.WithdrawFromJSON(resp.Body)
+	withdraw, e := withdraw2.WithdrawFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
@@ -261,7 +261,7 @@ func (u *Upbit) WithdrawCoin(currency, amount, address, secondaryAddress, transa
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) WithdrawKrw(amount string) (*withdraw.Withdraw, *model.Remaining, error) {
+func (u *Upbit) WithdrawKrw(amount string) (*withdraw2.Withdraw, *model.Remaining, error) {
 	if len(amount) == 0 {
 		return nil, nil, fmt.Errorf("amount length is 0")
 	}
@@ -286,7 +286,7 @@ func (u *Upbit) WithdrawKrw(amount string) (*withdraw.Withdraw, *model.Remaining
 	}
 	defer resp.Body.Close()
 
-	withdraw, e := withdraw.WithdrawFromJSON(resp.Body)
+	withdraw, e := withdraw2.WithdrawFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}

@@ -1,8 +1,8 @@
 package upbit
 
 import (
-	"toTheMoon/backend/handlers-web/upbit/model"
-	"toTheMoon/backend/handlers-web/upbit/model/exchange/service"
+	"toTheMoon/backend/model"
+	service2 "toTheMoon/backend/model/exchange/service"
 )
 
 // GetWalletStatus 입출금 현황
@@ -10,7 +10,7 @@ import (
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetWalletStatus() ([]*service.Wallet, *model.Remaining, error) {
+func (u *Upbit) GetWalletStatus() ([]*service2.Wallet, *model.Remaining, error) {
 	api, e := GetApiInfo(FuncGetWalletStatus)
 	if e != nil {
 		return nil, nil, e
@@ -27,7 +27,7 @@ func (u *Upbit) GetWalletStatus() ([]*service.Wallet, *model.Remaining, error) {
 	}
 	defer resp.Body.Close()
 
-	wallets, e := service.WalletsFromJSON(resp.Body)
+	wallets, e := service2.WalletsFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}
@@ -40,7 +40,7 @@ func (u *Upbit) GetWalletStatus() ([]*service.Wallet, *model.Remaining, error) {
 // [HEADERS]
 //
 // Authorization : REQUIRED. Authorization token(JWT)
-func (u *Upbit) GetApiKeys() ([]*service.ApiKey, *model.Remaining, error) {
+func (u *Upbit) GetApiKeys() ([]*service2.ApiKey, *model.Remaining, error) {
 	api, e := GetApiInfo(FuncGetApiKeys)
 	if e != nil {
 		return nil, nil, e
@@ -57,7 +57,7 @@ func (u *Upbit) GetApiKeys() ([]*service.ApiKey, *model.Remaining, error) {
 	}
 	defer resp.Body.Close()
 
-	apiKeys, e := service.ApiKeysFromJSON(resp.Body)
+	apiKeys, e := service2.ApiKeysFromJSON(resp.Body)
 	if e != nil {
 		return nil, nil, e
 	}

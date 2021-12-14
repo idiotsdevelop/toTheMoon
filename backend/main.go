@@ -64,10 +64,7 @@ func main() {
 	docs.SwaggerInfo.BasePath = ""
 
 	rApi := r.Group("/api")
-	//rApi.Use(middlewares.WrapMiddleware)
-
-	rWeb := rApi.Group("/web")
-	setWeb(rWeb)
+	setApi(rApi)
 
 	servingFE(r)
 

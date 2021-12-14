@@ -2,9 +2,9 @@ package upbit
 
 import (
 	"fmt"
-	"github.com/sangx2/upbit/model"
-	"github.com/sangx2/upbit/model/quotation"
 	"net/url"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/quotation"
 )
 
 // GetMinuteCandles 분 캔들

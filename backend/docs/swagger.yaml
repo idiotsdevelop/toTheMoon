@@ -1,65 +1,57 @@
 definitions:
-  bithumb.ReqCandleStick:
+  auth.ReqRegister:
     properties:
-      chart_interval:
+      upbit_access_key:
         type: string
-      ticker:
+      upbit_secret_key:
         type: string
+    required:
+    - upbit_access_key
+    - upbit_secret_key
+    type: object
+  auth.RespRegister:
+    properties:
+      message:
+        type: string
+      status_code:
+        type: integer
     type: object
 info:
   contact: {}
   license: {}
 paths:
-  /api/web/bithumb/candle_stick:
+  /api/auth/register:
     post:
       consumes:
       - application/json
-      description: 빗썸 캔들스틱 API
+      description: 회원가입
       parameters:
-      - description: 티커, 차트간격 기준
+      - description: 접근 키, 시크릿 키
         in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/bithumb.ReqCandleStick'
+          $ref: '#/definitions/auth.ReqRegister'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: string
-      summary: 빗썸 캔들스틱 API
-      tags:
-      - bithumb
-  /api/web/socket:
-    get:
-      consumes:
-      - application/json
-      description: 소켓
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
+            $ref: '#/definitions/auth.RespRegister'
+        "400":
+          description: Bad Request
           schema:
-            type: string
-      summary: 소켓
-      tags:
-      - trade
-  /api/web/test:
-    get:
-      consumes:
-      - application/json
-      description: 테스트
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
+            $ref: '#/definitions/auth.RespRegister'
+        "401":
+          description: Unauthorized
           schema:
-            type: string
-      summary: 테스트
+            $ref: '#/definitions/auth.RespRegister'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/auth.RespRegister'
+      summary: 회원가입
       tags:
-      - trade
+      - auth
 swagger: "2.0"

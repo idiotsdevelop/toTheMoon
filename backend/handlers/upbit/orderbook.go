@@ -2,8 +2,9 @@ package upbit
 
 import (
 	"fmt"
-	"github.com/sangx2/upbit/model"
-	"github.com/sangx2/upbit/model/quotation"
+	"toTheMoon/backend/model"
+	"toTheMoon/backend/model/quotation"
+
 	"net/url"
 )
 

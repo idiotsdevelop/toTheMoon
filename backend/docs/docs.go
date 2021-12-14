@@ -25,9 +25,9 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/web/bithumb/candle_stick": {
+        "/api/auth/register": {
             "post": {
-                "description": "빗썸 캔들스틱 API",
+                "description": "회원가입",
                 "consumes": [
                     "application/json"
                 ],
@@ -35,17 +35,17 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "bithumb"
+                    "auth"
                 ],
-                "summary": "빗썸 캔들스틱 API",
+                "summary": "회원가입",
                 "parameters": [
                     {
-                        "description": "티커, 차트간격 기준",
+                        "description": "접근 키, 시크릿 키",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/bithumb.ReqCandleStick"
+                            "$ref": "#/definitions/auth.ReqRegister"
                         }
                     }
                 ],
@@ -53,53 +53,25 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/auth.RespRegister"
                         }
-                    }
-                }
-            }
-        },
-        "/api/web/socket": {
-            "get": {
-                "description": "소켓",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "trade"
-                ],
-                "summary": "소켓",
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                    },
+                    "400": {
+                        "description": "Bad Request",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/auth.RespRegister"
                         }
-                    }
-                }
-            }
-        },
-        "/api/web/test": {
-            "get": {
-                "description": "테스트",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "trade"
-                ],
-                "summary": "테스트",
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/auth.RespRegister"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/auth.RespRegister"
                         }
                     }
                 }
@@ -107,14 +79,29 @@ var doc = `{
         }
     },
     "definitions": {
-        "bithumb.ReqCandleStick": {
+        "auth.ReqRegister": {
             "type": "object",
+            "required": [
+                "upbit_access_key",
+                "upbit_secret_key"
+            ],
             "properties": {
-                "chart_interval": {
+                "upbit_access_key": {
                     "type": "string"
                 },
-                "ticker": {
+                "upbit_secret_key": {
                     "type": "string"
+                }
+            }
+        },
+        "auth.RespRegister": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
                 }
             }
         }
